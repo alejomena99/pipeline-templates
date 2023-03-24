@@ -20,7 +20,7 @@ jobs:
         run: | 
           npm install
           npm i -D jest-sonar-reporter
-          npm run build
+          npm run react-scripts build
           npm run test
       
       - name: SonarQube Scan
