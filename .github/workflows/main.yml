@@ -15,7 +15,14 @@ jobs:
           # Repository name with owner. For example, actions/checkout
           repository: alejo-quind/calculator-front
           token: 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
-        
+          
+      - name: NPM
+        run: | 
+          npm install
+          i -D jest-sonar-reporter
+          npm run build
+          npm run test
+      
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
