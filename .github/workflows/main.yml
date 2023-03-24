@@ -21,11 +21,6 @@ jobs:
         
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
-        with:
-          arg: |
-            sonar.exclusions= **/node_modules/**,**/*.test.js,**/alejo-helm/**
-            sonar.testExecutionReportPaths=test-report.xml
-            sonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
           SONAR_TOKEN: 'ad36fe2bf378c4b38436779c30f1c058a5cc74b5'
           SONAR_HOST_URL: 'https://sonarcloud.io'
