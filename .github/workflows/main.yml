@@ -16,4 +16,5 @@ jobs:
           # Repository name with owner. For example, actions/checkout
           repository: alejo-quind/calculator-front
           token: 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
- 
+      - name: Echo message
+        run: tree
