@@ -19,7 +19,7 @@ jobs:
       - name: NPM
         run: | 
           npm install
-          i -D jest-sonar-reporter
+          npm i -D jest-sonar-reporter
           npm run build
           npm run test
       
