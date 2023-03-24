@@ -19,7 +19,7 @@ jobs:
       - name: NPM
         run: | 
           npm install
-          npm install react react-dom
+          npm install react-scripts@latest
           npm i -D jest-sonar-reporter
           npm run build
           npm run test
