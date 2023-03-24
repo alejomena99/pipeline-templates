@@ -24,6 +24,8 @@ jobs:
         env:
           SONAR_TOKEN: 'ad36fe2bf378c4b38436779c30f1c058a5cc74b5'
           SONAR_HOST_URL: 'https://sonarcloud.io'
+          SONAR_PROJECT_KEY: 'training-AlejandroFront'
+          SONAR_ORGANIZATION: 'quind'
 
       - name: Echo message
         run: echo "¡Funcionó!"
