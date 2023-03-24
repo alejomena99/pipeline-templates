@@ -10,3 +10,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Echo message
         run: echo "¡Funcionó!"
+      - name: Checkout
+        uses: actions/checkout@v2.7.0
+        with:
+          # Repository name with owner. For example, actions/checkout
+          repository: https://github.com/alejo-quind/calculator-front.git
+          token: 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
+ 
