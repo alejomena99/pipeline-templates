@@ -6,6 +6,10 @@ jobs:
   echo-message:
     runs-on: ubuntu-latest
     steps:
+    
+      - name: Usar variable enviada desde flujo de trabajo principal
+        run: echo ${{inputs.var_reusable}}
+        
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -34,9 +38,6 @@ jobs:
         
       - name: Echo secret
         run: echo ${{ secrets.SONAR_TOKEN}}
-  
-      - name: Usar variable enviada desde flujo de trabajo principal
-        run: echo ${{inputs.var_reusable}}
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
