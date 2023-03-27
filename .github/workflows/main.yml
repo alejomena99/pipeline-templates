@@ -7,9 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      - name: Usar variable enviada desde flujo de trabajo principal
-        run: echo ${{inputs.var_reusable}}
-        
       - name: Checkout
         uses: actions/checkout@v2
 
