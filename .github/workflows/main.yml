@@ -14,7 +14,7 @@ jobs:
         with:
           # Repository name with owner. For example, actions/checkout
           repository: ${{ inputs.REPO_NAME }}
-          token: ${{ inputs.REPO_KEY }}
+          token: ${{ inputs.REPO_TOKEN}}
           
       - name: NPM
         run: | 
