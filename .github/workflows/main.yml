@@ -39,8 +39,9 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.4.0
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           target: 'http://20.96.164.130:8080/'
-          cmd_options: '-a -J report_json'
+          cmd_options: '-a -J report_json -m 1'
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
