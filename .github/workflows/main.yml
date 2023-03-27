@@ -14,7 +14,7 @@ jobs:
         with:
           # Repository name with owner. For example, actions/checkout
           repository: ${{ secrets.REPO_NAME }}
-          token: ${{ secrets.REPO_TOKEN}}
+          token: ${{ secrets.REPO_TOKEN }}
           
       - name: NPM
         run: | 
@@ -27,8 +27,8 @@ jobs:
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
-          SONAR_TOKEN: 'ad36fe2bf378c4b38436779c30f1c058a5cc74b5'
-          SONAR_HOST_URL: 'https://sonarcloud.io'
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
 
       - name: Tree
         run: tree
