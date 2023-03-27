@@ -13,8 +13,8 @@ jobs:
         uses: actions/checkout@v2.7.0
         with:
           # Repository name with owner. For example, actions/checkout
-          repository: ${{ inputs.REPO_FRONT_NAME }}
-          token: ${{ inputs.REPO_FRONT_TOKEN}}
+          repository: ${{ secrets.REPO_NAME }}
+          token: ${{ secrets.REPO_TOKEN}}
           
       - name: NPM
         run: | 
