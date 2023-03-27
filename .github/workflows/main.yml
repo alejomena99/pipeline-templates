@@ -35,6 +35,11 @@ jobs:
         
       - name: Echo secret
         run: echo ${{ secrets.SONAR_TOKEN}}
+      
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          target: 'http://20.96.164.130:8080/'
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
