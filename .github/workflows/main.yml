@@ -34,6 +34,9 @@ jobs:
           VER: ${{ secrets.VER }}
           TAG_ID: ${{ secrets.TAG_ID }}
           
+      - name: Set file permissions
+        run: chmod 644 alejo-helm/values.yaml
+          
       - name: Show values.yaml
         run: cat alejo-helm/values.yaml
   
