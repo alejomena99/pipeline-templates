@@ -21,7 +21,7 @@ jobs:
         
       - name: Replace tokens in values.yaml
         run: |
-          envsubst < alejo-helm/values.yaml.template > alejo-helm/values.yaml
+          envsubst < alejo-helm/values.yaml > alejo-helm/values.yaml
         env:
           POD_NAME: ${{ secrets.POD_NAME }}
           SVC_NAME: ${{ secrets.SVC_NAME }}
