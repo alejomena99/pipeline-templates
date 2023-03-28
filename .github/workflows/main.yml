@@ -19,6 +19,9 @@ jobs:
       - name: Tree
         run: tree
         
+      - name: Show values.yaml
+        run: cat alejo-helm/values.yaml
+        
       - name: Replace tokens in values.yaml
         run: |
           envsubst < alejo-helm/values.yaml > alejo-helm/values.yaml
