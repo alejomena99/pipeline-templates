@@ -59,6 +59,13 @@ jobs:
         run: |
           docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
           docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
+          
+      - name: Setup Helm  
+        uses: azure/setup-helm@v3
+        with:
+           version: '<version>' # default is latest (stable)
+           token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+        id: install
 
       - name: Echo message
         run: echo "¡Funcionó!"
