@@ -15,18 +15,6 @@ jobs:
         with:
           repository: ${{ secrets.REPO_NAME }}
           token: ${{ secrets.REPO_TOKEN }}
-                 
-      - name: Replace tokens in values.yaml
-        run: |
-          envsubst < alejo-helm/values.yaml > alejo-helm/values.yaml
-        env:
-          POD_NAME: ${{ secrets.POD_NAME }}
-          SVC_NAME: ${{ secrets.SVC_NAME }}
-          APP: ${{ secrets.APP }}
-          ACR_SERVER: ${{ secrets.ACR_SERVER }}
-          REPOSITORIO: ${{ secrets.REPOSITORIO }}
-          VER: ${{ secrets.VER }}
-          TAG_ID: ${{ secrets.TAG_ID }}
   
       - name: NPM
         run: | 
