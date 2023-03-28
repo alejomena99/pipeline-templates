@@ -47,7 +47,6 @@ jobs:
         with:
           name: 'Drop'
           path: '${{ github.workspace }}/build'
-#//////////////////////////////////////////////////////////////////
 
       - name: Azure ACR login
         uses: azure/docker-login@v1
@@ -56,9 +55,6 @@ jobs:
           username: ${{ secrets.ACR_NAME }}
           password: ${{ secrets.ACR_TOKEN }}
 
-      - name: Tree
-        run: tree
-        
       - name: Build and Push ACR
         run: |
           docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
