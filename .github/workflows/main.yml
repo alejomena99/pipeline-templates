@@ -57,7 +57,7 @@ jobs:
           password: ${{ secrets.ACR_TOKEN }}
           
       - name: Build and Push ACR
-      - run: |
+        run: |
           docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}${{ github.sha }}
           docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}${{ github.sha }}
 
