@@ -68,6 +68,15 @@ jobs:
       
       - name: Cat kube config
         run: sudo cat /home/runner/.kube/config
-            
+
+      - name: Setup Helm  
+        uses: azure/setup-helm@v3
+        with:
+           version: 'latest' # default is latest (stable)
+           token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+        id: install
+      - name: Helm deployment
+        run: helm install ${{ secrets.APP }} alejo-helm -f alejo-helm/values.yaml
+        
       - name: Echo message
         run: echo "¡Funcionó!"
