@@ -32,7 +32,7 @@ jobs:
 
       - name: Replace tokens in deployment file
         run: |
-          envsubst < ${{ github.workspace }}/alejo-helm/values.yaml > ${{ github.workspace }}/alejo-helm/values.yaml
+          envsubst < alejo-helm/values.yaml > alejo-helm/values.yaml
         env:
           POD_NAME: ${{ secrets.POD_NAME }}
           SVC_NAME: ${{ secrets.SVC_NAME }}
