@@ -68,7 +68,7 @@ jobs:
         id: install
 
       - name: Helm deployment
-        run: helm install ${{ secrets.APP }} alejo-helm -f values.yaml
+        run: helm install ${{ secrets.APP }} alejo-helm -f alejo-helm/values.yaml
 
       - name: Echo message
         run: echo "¡Funcionó!"
