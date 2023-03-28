@@ -15,10 +15,7 @@ jobs:
         with:
           repository: ${{ secrets.REPO_NAME }}
           token: ${{ secrets.REPO_TOKEN }}
-          
-      - name: Tree
-        run: tree
-        
+             
       - name: Show values.yaml
         run: cat alejo-helm/values.yaml
         
@@ -34,8 +31,8 @@ jobs:
           VER: ${{ secrets.VER }}
           TAG_ID: ${{ secrets.TAG_ID }}
           
-      - name: Set file permissions
-        run: chmod 644 alejo-helm/values.yaml
+      - name: Tree
+        run: tree
           
       - name: Show values.yaml
         run: cat alejo-helm/values.yaml
