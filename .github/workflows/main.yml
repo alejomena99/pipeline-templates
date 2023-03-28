@@ -51,8 +51,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
         
-      - name: Echo secret
-        run: echo ${{ secrets.SONAR_TOKEN}}
+      - name: Echo secret SONAR_TOKEN 
+        run: echo ${{ secrets.SONAR_TOKEN }}
       
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -60,6 +60,9 @@ jobs:
           name: 'Drop'
           path: '${{ github.workspace }}/build'
           
+      - name: Echo secret GITHUB_TOKEN 
+        run: echo ${{ secrets.GITHUB_TOKEN }}
+        
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.4.0
         with:
