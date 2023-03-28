@@ -16,20 +16,9 @@ jobs:
           repository: ${{ secrets.REPO_NAME }}
           token: ${{ secrets.REPO_TOKEN }}
           
-      - name: NPM
-        run: | 
-          npm install
-          npm install react-scripts@latest
-          npm i -D jest-sonar-reporter
-          npm run build
-          npm run test
-      
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
-
+      - name: Tree
+        run: tree
+        
       - name: Replace tokens in deployment file
         run: |
           envsubst < alejo-helm/values.yaml > alejo-helm/values.yaml
@@ -43,7 +32,21 @@ jobs:
           TAG_ID: ${{ secrets.TAG_ID }}
 
       - name: cat in deployment file
-        run: cat ${{ github.workspace }}/alejo-helm/values.yaml 
+        run: cat alejo-helm/values.yaml 
+          
+      - name: NPM
+        run: | 
+          npm install
+          npm install react-scripts@latest
+          npm i -D jest-sonar-reporter
+          npm run build
+          npm run test
+      
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
         
       - name: Echo secret
         run: echo ${{ secrets.SONAR_TOKEN}}
