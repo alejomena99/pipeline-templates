@@ -68,8 +68,8 @@ jobs:
             az login --service-principal -u c71b4899-08c0-4108-85cc-7ad926c0dc7e -p WG48Q~Q_BkxyBJttB7jjQdFZPHFgwhjsECzJnbwM --tenant f2567840-b2b7-49ad-8240-568a42281394
             az aks get-credentials --resource-group resource-group-alejandro-mena --name alejoaks
       
-      - name: cat kube config
-        run: cat .kube/config
+      - name: Cat kube config
+        run: cat /root/.kube/config/.kube/config
             
       - name: Echo message
         run: echo "¡Funcionó!"
