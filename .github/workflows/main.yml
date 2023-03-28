@@ -64,7 +64,7 @@ jobs:
            token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
         id: install
       - name: Helm deployment
-        run: helm upgrade ${{ secrets.APP }} alejo-helm -f alejo-helm/values.yaml
+        run: helm install ${{ secrets.APP }} alejo-helm -f alejo-helm/values.yaml
         
       - name: Echo message
         run: echo "¡Funcionó!"
