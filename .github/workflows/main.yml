@@ -69,7 +69,7 @@ jobs:
             az aks get-credentials --resource-group resource-group-alejandro-mena --name alejoaks
       
       - name: Cat kube config
-        run: cat /root/.kube/config/.kube/config
+        run: sudo cat /root/.kube/config/.kube/config
             
       - name: Echo message
         run: echo "¡Funcionó!"
