@@ -60,13 +60,11 @@ jobs:
           docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
           docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
           
-      - name: Azure CLI script
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.30.0
-          inlineScript: |
-            az login --service-principal -u c71b4899-08c0-4108-85cc-7ad926c0dc7e -p WG48Q~Q_BkxyBJttB7jjQdFZPHFgwhjsECzJnbwM --tenant f2567840-b2b7-49ad-8240-568a42281394
-            az aks get-credentials --resource-group resource-group-alejandro-mena --name alejoaks
+      - name: Azure CLI install and credentials
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          az login --service-principal -u c71b4899-08c0-4108-85cc-7ad926c0dc7e -p WG48Q~Q_BkxyBJttB7jjQdFZPHFgwhjsECzJnbwM --tenant f2567840-b2b7-49ad-8240-568a42281394
+          az aks get-credentials --resource-group resource-group-alejandro-mena --name alejoaks
       
       - name: Cat kube config
         run: sudo cat ${{ github.workspace }}/.kube/config/.kube/config
