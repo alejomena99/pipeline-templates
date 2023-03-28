@@ -32,7 +32,7 @@ jobs:
           TAG_ID: ${{ secrets.TAG_ID }}
 
       - name: cat in deployment file
-        run: cat alejo-helm/values.yaml 
+        run: cat ${{ github.workspace }}/alejo-helm/values.yaml 
           
       - name: NPM
         run: | 
