@@ -30,19 +30,24 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
 
-      - name: Tree
-        run: tree
+      - name: Replace tokens in deployment file
+        run: |
+          envsubst < ${{ github.workspace }}/alejo-helm/values.yaml > ${{ github.workspace }}/alejo-helm/values.yaml
+        env:
+          POD_NAME: ${{ secrets.POD_NAME }}
+          SVC_NAME: ${{ secrets.SVC_NAME }}
+          APP: ${{ secrets.APP }}
+          ACR_SERVER: ${{ secrets.ACR_SERVER }}
+          REPOSITORIO: ${{ secrets.REPOSITORIO }}
+          VER: ${{ secrets.VER }}
+          TAG_ID: ${{ secrets.TAG_ID }}
+
+      - name: cat in deployment file
+        run: cat ${{ github.workspace }}/alejo-helm/values.yaml 
         
       - name: Echo secret
         run: echo ${{ secrets.SONAR_TOKEN}}
       
-      - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.4.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target: 'http://20.62.34.254:8080/calculator'
-          cmd_options: '-a -J report_json -m 1'
-        
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
