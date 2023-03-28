@@ -61,8 +61,8 @@ jobs:
         
       - name: Build and Push ACR
         run: |
-          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ secrets.TAG_ID }}
-          docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ secrets.TAG_ID }}
+          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
+          docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
 
       - name: Echo message
         run: echo "¡Funcionó!"
