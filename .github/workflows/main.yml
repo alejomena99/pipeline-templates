@@ -45,7 +45,7 @@ jobs:
 
       - name: Build and Push ACR
         run: |
-          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
+          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:1234
           docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:1234
           
       - name: Azure CLI install and credentials
