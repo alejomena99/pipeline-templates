@@ -18,7 +18,7 @@ jobs:
           
       - name: Modificar variable en archivo de texto
         run: |
-          sed -i "s/#{POD_NAME}#/nuevo_pod_name/g; s/#{SVC_NAME}#/nuevo_svc_name/g; s/#{APP}#/nuevo_app/g; s/#{ACR_SERVER}#/nuevo_acr_server/g; s/#{REPOSITORIO}#/nuevo_repositorio/g; s/#{TAG_ID}#/nuevo_tag_id/g" ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i "s/#{POD_NAME}#/${{ secrets.POD_NAME }}/g; s/#{SVC_NAME}#/${{ secrets.SVC_NAME }}/g; s/#{APP}#/${{ secrets.APP }}/g; s/#{ACR_SERVER}#/${{ secrets.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ secrets.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.sha }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
           cat ${{ github.workspace }}/alejo-helm/values.yaml
           
       - name: NPM
