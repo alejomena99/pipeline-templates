@@ -18,7 +18,7 @@ jobs:
           
       - name: Replace token
         run: |
-          sed -i "s/#{POD_NAME}#/${{ secrets.POD_NAME }}/g; s/#{SVC_NAME}#/${{ secrets.SVC_NAME }}/g; s/#{APP}#/${{ secrets.APP }}/g; s/#{ACR_SERVER}#/${{ secrets.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ secrets.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.sha }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i "s/#{POD_NAME}#/${{ secrets.POD_NAME }}/g; s/#{SVC_NAME}#/${{ secrets.SVC_NAME }}/g; s/#{APP}#/${{ secrets.APP }}/g; s/#{ACR_SERVER}#/${{ secrets.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ secrets.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.run_number }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
           cat ${{ github.workspace }}/alejo-helm/values.yaml
           
       - name: NPM
@@ -50,8 +50,8 @@ jobs:
 
       - name: Build and Push ACR
         run: |
-          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
-          docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
+          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.run_number }}
+          docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.run_number }}
           
       - name: Azure CLI install and credentials
         run: |
