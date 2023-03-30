@@ -18,6 +18,7 @@ jobs:
           
       - name: Modificar variable en archivo de texto
         run: |
+          tree
           sed -i 's/VAR: "valor a remplazar"/VAR: "nuevo valor"/g' archivo.txt
           cat ${{ github.workspace }}/archivo.txt
           
