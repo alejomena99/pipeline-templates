@@ -71,10 +71,11 @@ jobs:
         
       - name: Helm deployment
         run: helm upgrade --namespace default --install --values alejo-helm/values.yaml ${{ secrets.APP }} alejo-helm
-
+     
       - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.4.0
+        uses: zaproxy/action-api-scan@v0.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           target: 'http://20.62.53.101:8080/'
           
       - name: Echo message
