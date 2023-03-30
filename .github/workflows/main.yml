@@ -15,7 +15,12 @@ jobs:
         with:
           repository: ${{ secrets.REPO_NAME }}
           token: ${{ secrets.REPO_TOKEN }}
-  
+          
+      - name: Modificar variable en archivo de texto
+        run: |
+          sed -i 's/VAR: "valor a remplazar"/VAR: "nuevo valor"/g' ${{ github.workspace }}/archivo.txt
+          cat ${{ github.workspace }}/archivo.txt
+          
       - name: NPM
         run: | 
           npm install
