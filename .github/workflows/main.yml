@@ -18,7 +18,7 @@ jobs:
           
       - name: Modificar variable en archivo de texto
         run: |
-          sed -i 's/VAR: "valor a remplazar"/VAR: "nuevo valor"/g' ${{ github.workspace }}/archivo.txt
+          sed -i 's/VAR: "valor a remplazar"/VAR: "nuevo valor"/g' archivo.txt
           cat ${{ github.workspace }}/archivo.txt
           
       - name: NPM
