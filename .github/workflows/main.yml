@@ -18,12 +18,12 @@ jobs:
           
       - name: Modificar variable en archivo de texto
         run: |
-          sed -i 's/podName: "#{POD_NAME}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
-          sed -i 's/svcName: "#{SVC_NAME}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
-          sed -i 's/app: "#{APP}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
-          sed -i 's/acrServer: "#{ACR_SERVER}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
-          sed -i 's/imageName: "#{REPOSITORIO}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
-          sed -i 's/imageTag: "#{TAG_ID}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/podName: "#{POD_NAME}#"/podName: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/svcName: "#{SVC_NAME}#"/svcName: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/app: "#{APP}#"/app: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/acrServer: "#{ACR_SERVER}#"/acrServer: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/imageName: "#{REPOSITORIO}#"/imageName: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/imageTag: "#{TAG_ID}#"/imageTag: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
           
           cat ${{ github.workspace }}/alejo-helm/values.yaml
           
