@@ -18,8 +18,14 @@ jobs:
           
       - name: Modificar variable en archivo de texto
         run: |
-          sed -i 's/VAR: "valor a remplazar"/VAR: "nuevo valor"/g' ${{ github.workspace }}/prueba.txt
-          cat ${{ github.workspace }}/prueba.txt
+          sed -i 's/podName: "#{POD_NAME}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/svcName: "#{SVC_NAME}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/app: "#{APP}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/acrServer: "#{ACR_SERVER}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/imageName: "#{REPOSITORIO}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i 's/imageTag: "#{TAG_ID}#"/VAR: "nuevo valor"/g' ${{ github.workspace }}/alejo-helm/values.yaml
+          
+          cat ${{ github.workspace }}/alejo-helm/values.yaml
           
       - name: NPM
         run: | 
@@ -50,8 +56,8 @@ jobs:
 
       - name: Build and Push ACR
         run: |
-          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:12345
-          docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:12345
+          docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
+          docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.sha }}
           
       - name: Azure CLI install and credentials
         run: |
