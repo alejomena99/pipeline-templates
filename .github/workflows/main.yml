@@ -65,7 +65,7 @@ jobs:
         id: install
         
       - name: Helm deployment
-        run: helm upgrade --namespace default --install --values alejo-helm/values.yaml ${{ secrets.APP }} alejo-helm
+        run: helm upgrade --namespace default --install --values alejo-helm/values.yaml ${{ secrets.REPOSITORIO }} alejo-helm
         
       - name: Echo message
         run: echo "¡Funcionó!"
