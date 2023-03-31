@@ -1,15 +1,15 @@
-inputs:
-  mi_variable:
-    description: 'Una descripción de la variable mi_variable'
-    required: true
 
 on:
   workflow_dispatch:
   workflow_call:
-    
+    inputs:
+      mi_variable:
+        required: true
+        type: string
+
 jobs:
   echo-message:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  
     steps:
     
       - name: Checkout
