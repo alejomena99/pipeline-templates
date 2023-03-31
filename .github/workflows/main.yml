@@ -50,10 +50,12 @@ jobs:
 
       - name: Azure ACR login
         uses: azure/docker-login@v1
+        env:
+          TOKEN: $(az acr credential show -n alejoacr -o json | jq -r '.passwords[0].value')
         with:
           login-server: ${{ secrets.ACR_SERVER }}
           username: ${{ secrets.ACR_NAME }}
-          password: $(az acr credential show -n alejoacr -o json | jq -r '.passwords[0].value')
+          password: $TOKEN
 
       - name: Build and Push ACR
         run: |
