@@ -16,16 +16,8 @@ jobs:
   Build_and_Test:
     uses: alejo-quind/pipeline-templates/.github/workflows/npm_B&T.yml@main 
     if: ${{ inputs.BUILD_ENV == 'npm' }}
-    with:
-      REPO_NAME: ${{ secrets.REPO_NAME }}
-      REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      POD_NAME: ${{ secrets.POD_NAME }}
-      SVC_NAME: ${{ secrets.SVC_NAME }}
-      APP: ${{ secrets.APP }}
-      ACR_SERVER: ${{ secrets.ACR_SERVER }}
-      REPOSITORIO: ${{ secrets.REPOSITORIO }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      SONAR_HOST: ${{ secrets.SONAR_HOST }}
+    secrets:
+      inherit
 
   Azure_and_Docker:
     runs-on: ubuntu-latest  
