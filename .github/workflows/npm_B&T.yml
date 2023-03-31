@@ -3,6 +3,14 @@ on:
   workflow_call:
     inputs:
     
+      REPO_NAME:
+        required: true
+        type: string
+        
+      POD_REPO_TOKEN:
+        required: true
+        type: string
+        
       POD_NAME:
         required: true
         type: string
@@ -39,8 +47,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.7.0
         with:
-          repository: ${{ secrets.REPO_NAME }}
-          token: ${{ secrets.REPO_TOKEN }}
+          repository: ${{ inputs.REPO_NAME }}
+          token: ${{ inputs.REPO_TOKEN }}
           
       - name: Replace token
         run: |
