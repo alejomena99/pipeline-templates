@@ -1,7 +1,36 @@
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+    
+      POD_NAME:
+        required: true
+        type: string
   
+      SVC_NAME:
+        required: true
+        type: string
+        
+      APP:
+        required: true
+        type: string
+
+      ACR_SERVER:
+        required: true
+        type: string
+        
+      REPOSITORIO:
+        required: true
+        type: string
+
+      SONAR_TOKEN:
+        required: true
+        type: string
+        
+      SONAR_HOST:
+        required: true
+        type: string
+        
 jobs:
   echo-message:
     runs-on: ubuntu-latest  
@@ -15,7 +44,7 @@ jobs:
           
       - name: Replace token
         run: |
-          sed -i "s/#{POD_NAME}#/${{ secrets.POD_NAME }}/g; s/#{SVC_NAME}#/${{ secrets.SVC_NAME }}/g; s/#{APP}#/${{ secrets.APP }}/g; s/#{ACR_SERVER}#/${{ secrets.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ secrets.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.run_number }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
+          sed -i "s/#{POD_NAME}#/${{ inputs.POD_NAME }}/g; s/#{SVC_NAME}#/${{ inputs.SVC_NAME }}/g; s/#{APP}#/${{ inputs.APP }}/g; s/#{ACR_SERVER}#/${{ inputs.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ inputs.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.run_number }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
           cat ${{ github.workspace }}/alejo-helm/values.yaml
           
       - name: NPM
@@ -29,8 +58,8 @@ jobs:
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
+          SONAR_TOKEN: ${{ inputs.SONAR_TOKEN}}
+          SONAR_HOST_URL: ${{ inputs.SONAR_HOST }}
       
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
