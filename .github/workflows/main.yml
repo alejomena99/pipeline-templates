@@ -3,23 +3,28 @@ on:
   workflow_dispatch:
   workflow_call:
     inputs:
+    
       BUILD_ENV:
         required: true
         type: string
 
+      VAR:
+        required: true
+        type: string
+
 jobs:
-  echo-message:
+  Build_and_Test:
     runs-on: ubuntu-latest  
+    if: ${{ inputs.BUILD_ENV == 'npm' }}
     steps:
     
       - name: Checkout
         uses: actions/checkout@v2
         
       - name: Imprimir valor de la variable
-        run: echo "El valor de mi_variable es ${{inputs.mi_variable}}"
+        run: echo "El valor de mi_variable es ${{ inputs.BUILD_ENV }}"
       
       - name: Build and Test NPM
-        if: ${{ inputs.BUILD_ENV == 'npm' }}
         uses: alejo-quind/pipeline-templates/.github/workflows/npm_B&T.yml@main
         with:
           REPO_NAME: ${{ secrets.REPO_NAME }}
@@ -32,7 +37,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST: ${{ secrets.SONAR_HOST }}
 
-
+  Azure_and_Docker:
+    runs-on: ubuntu-latest  
+    if: ${{ inputs.VAR == 'no' }}
+    steps:
+    
       - name: Azure ACR login
         uses: azure/docker-login@v1
         with:
