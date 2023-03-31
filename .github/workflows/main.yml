@@ -1,6 +1,7 @@
 on:
   workflow_dispatch:
   workflow_call:
+
   
 jobs:
   echo-message:
@@ -10,8 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: VAR check
-        run: echo ${{ env.BUILD_COMPILER }}
+      - name: Example Step
+        env:
+          MY_ENV_VAR: ${{ env.MY_ENV_VAR }}
+        run: echo ${{ env.MY_ENV_VAR }}
         
       - name: Checkout
         uses: actions/checkout@v2.7.0
