@@ -21,13 +21,6 @@ jobs:
           sed -i "s/#{POD_NAME}#/${{ secrets.POD_NAME }}/g; s/#{SVC_NAME}#/${{ secrets.SVC_NAME }}/g; s/#{APP}#/${{ secrets.APP }}/g; s/#{ACR_SERVER}#/${{ secrets.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ secrets.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.run_number }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
           cat ${{ github.workspace }}/alejo-helm/values.yaml
           
-      - name: Azure CLI install and credentials
-        run: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-          az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
-          az aks get-credentials --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.AKS_NAME }}
-          az acr update -n alejoacr --resource-group ${{ secrets.RESOURCE_GROUP }} --admin-enabled true
-      
       - name: NPM
         run: | 
           npm install
@@ -50,18 +43,22 @@ jobs:
 
       - name: Azure ACR login
         uses: azure/docker-login@v1
-        env:
-          TOKEN: $(az acr credential show -n alejoacr -o json | jq -r '.passwords[0].value')
         with:
           login-server: ${{ secrets.ACR_SERVER }}
           username: ${{ secrets.ACR_NAME }}
-          password: ${{ env.TOKEN }}
+          password: ${{ secrets.ACR_TOKEN }}
 
       - name: Build and Push ACR
         run: |
           docker build . -t ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.run_number }}
           docker push ${{ secrets.ACR_SERVER }}/${{ secrets.REPOSITORIO }}:${{ github.run_number }}
           
+      - name: Azure CLI install and credentials
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
+          az aks get-credentials --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.AKS_NAME }}
+      
       - name: Cat kube config
         run: sudo cat /home/runner/.kube/config
       
@@ -74,6 +71,6 @@ jobs:
         
       - name: Helm deployment
         run: helm upgrade --namespace default --install --values alejo-helm/values.yaml ${{ secrets.APP }} alejo-helm
-         
+           
       - name: Echo message
         run: echo "¡Funcionó!"
