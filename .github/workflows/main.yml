@@ -17,6 +17,10 @@ jobs:
         
       - name: Imprimir valor de la variable
         run: echo "El valor de mi_variable es ${{inputs.mi_variable}}"
+      
+      - name: Do something if my_var is some_value
+        if: ${{ inputs.mi_variable == 'npm' }}
+        run: echo "funciono"
         
       - name: Checkout
         uses: actions/checkout@v2.7.0
