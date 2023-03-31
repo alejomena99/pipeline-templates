@@ -1,12 +1,9 @@
 on:
   workflow_dispatch:
   workflow_call:
-
   
 jobs:
   echo-message:
-    env:
-      MY_ENV_VAR: ${{ env.MY_ENV_VAR }}
     runs-on: ubuntu-latest
     steps:
     
