@@ -2,6 +2,9 @@ on:
   workflow_dispatch:
   workflow_call:
 
+env:
+  BUILD_COMPILER: ''
+  
 jobs:
   echo-message:
     runs-on: ubuntu-latest
