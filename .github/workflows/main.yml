@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   workflow_call:
-  
+    
 jobs:
   echo-message:
     runs-on: ubuntu-latest
@@ -9,6 +9,9 @@ jobs:
     
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Imprimir valor de la variable
+        run: echo "El valor de mi_variable es {{inputs.mi_variable}}"
         
       - name: Checkout
         uses: actions/checkout@v2.7.0
