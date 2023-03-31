@@ -13,9 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Example Step
-        run: echo ${{ env.MY_ENV_VAR }}
-        
       - name: Checkout
         uses: actions/checkout@v2.7.0
         with:
