@@ -55,7 +55,7 @@ jobs:
         with:
           login-server: ${{ secrets.ACR_SERVER }}
           username: ${{ secrets.ACR_NAME }}
-          password: $TOKEN
+          password: ${{ env.TOKEN }}
 
       - name: Build and Push ACR
         run: |
