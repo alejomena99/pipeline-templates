@@ -1,9 +1,6 @@
 on:
   workflow_dispatch:
   workflow_call:
-
-env:
-  BUILD_COMPILER: ''
   
 jobs:
   echo-message:
@@ -12,7 +9,10 @@ jobs:
     
       - name: Checkout
         uses: actions/checkout@v2
-
+        
+      - name: VAR check
+        run: echo ${{ env.BUILD_COMPILER }}
+        
       - name: Checkout
         uses: actions/checkout@v2.7.0
         with:
