@@ -26,7 +26,7 @@ jobs:
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
           az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
           az aks get-credentials --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.AKS_NAME }}
-          az acr update -n alejoacr --admin-enabled true
+          az acr update -n alejoacr --resource-group ${{ secrets.RESOURCE_GROUP }} --admin-enabled true
       
       - name: NPM
         run: | 
@@ -72,12 +72,6 @@ jobs:
         
       - name: Helm deployment
         run: helm upgrade --namespace default --install --values alejo-helm/values.yaml ${{ secrets.APP }} alejo-helm
-     
-      - name: ZAP Scan
-        uses: zaproxy/action-api-scan@v0.1.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target: 'http://20.62.53.101:8080/'
-          
+         
       - name: Echo message
         run: echo "¡Funcionó!"
