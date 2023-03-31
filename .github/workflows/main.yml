@@ -5,6 +5,8 @@ on:
   
 jobs:
   echo-message:
+    env:
+      MY_ENV_VAR: ${{ env.MY_ENV_VAR }}
     runs-on: ubuntu-latest
     steps:
     
@@ -12,8 +14,6 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Example Step
-        env:
-          MY_ENV_VAR: ${{ env.MY_ENV_VAR }}
         run: echo ${{ env.MY_ENV_VAR }}
         
       - name: Checkout
