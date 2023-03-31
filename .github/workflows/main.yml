@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   workflow_call:
     inputs:
-      mi_variable:
+      BUILD_ENV:
         required: true
         type: string
 
@@ -19,9 +19,11 @@ jobs:
         run: echo "El valor de mi_variable es ${{inputs.mi_variable}}"
       
       - name: Build and Test NPM
-        if: ${{ inputs.mi_variable == 'npm' }}
+        if: ${{ inputs.BUILD_ENV == 'npm' }}
         uses: alejo-quind/pipeline-templates/.github/workflows/main.yml@main
         with:
+          REPO_NAME: ${{ secrets.REPO_NAME }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
           POD_NAME: ${{ secrets.POD_NAME }}
           SVC_NAME: ${{ secrets.SVC_NAME }}
           APP: ${{ secrets.APP }}
