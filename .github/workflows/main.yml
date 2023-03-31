@@ -1,3 +1,8 @@
+inputs:
+  mi_variable:
+    description: 'Una descripción de la variable mi_variable'
+    required: true
+
 on:
   workflow_dispatch:
   workflow_call:
