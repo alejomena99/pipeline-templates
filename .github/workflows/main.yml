@@ -18,40 +18,18 @@ jobs:
       - name: Imprimir valor de la variable
         run: echo "El valor de mi_variable es ${{inputs.mi_variable}}"
       
-      - name: Do something if my_var is some_value
+      - name: Build and Test NPM
         if: ${{ inputs.mi_variable == 'npm' }}
-        run: echo "funciono"
-        
-      - name: Checkout
-        uses: actions/checkout@v2.7.0
+        uses: alejo-quind/pipeline-templates/.github/workflows/main.yml@main
         with:
-          repository: ${{ secrets.REPO_NAME }}
-          token: ${{ secrets.REPO_TOKEN }}
-          
-      - name: Replace token
-        run: |
-          sed -i "s/#{POD_NAME}#/${{ secrets.POD_NAME }}/g; s/#{SVC_NAME}#/${{ secrets.SVC_NAME }}/g; s/#{APP}#/${{ secrets.APP }}/g; s/#{ACR_SERVER}#/${{ secrets.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ secrets.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.run_number }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
-          cat ${{ github.workspace }}/alejo-helm/values.yaml
-          
-      - name: NPM
-        run: | 
-          npm install
-          npm install react-scripts@latest
-          npm i -D jest-sonar-reporter
-          npm run build
-          npm run test
-      
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
-      
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: 'Drop'
-          path: '${{ github.workspace }}/build'
+          POD_NAME: ${{ secrets.POD_NAME }}
+          SVC_NAME: ${{ secrets.SVC_NAME }}
+          APP: ${{ secrets.APP }}
+          ACR_SERVER: ${{ secrets.ACR_SERVER }}
+          REPOSITORIO: ${{ secrets.REPOSITORIO }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST: ${{ secrets.SONAR_HOST }}
+
 
       - name: Azure ACR login
         uses: azure/docker-login@v1
