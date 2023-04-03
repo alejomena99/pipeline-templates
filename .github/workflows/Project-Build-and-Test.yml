@@ -19,10 +19,6 @@ jobs:
           ref: main
           path: project
           token: ${{ secrets.REPO_TOKEN }}
-          
-      - name: Move contents of 'project' folder to root
-        run: |
-          rsync -a project/ . && rm -rf project
       
       - name: Tree
         run: tree
