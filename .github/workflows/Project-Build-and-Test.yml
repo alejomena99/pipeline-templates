@@ -12,19 +12,11 @@ jobs:
     runs-on: ubuntu-latest  
     steps:
     
-      - name: Export the "project" folder from the repository
-        run: |
-          svn export --depth=empty --username alejo-quind --password ${{ secrets.REPO_TOKEN }} ${{ secrets.REPO_NAME }}/trunk/project
-
-#      - name: Clone the "project" folder from the repository
-#        uses: actions/checkout@v2
-#        with:
-#          repository: ${{ secrets.REPO_NAME }}
-#          token: ${{ secrets.REPO_TOKEN }}
-#          path: 'project'
-      
-      - name: Tree
-        run: tree
+      - name: Clone the "project" folder from the repository
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ secrets.REPO_NAME }}
+          token: ${{ secrets.REPO_TOKEN }}
           
 #      - name: Replace token
 #        run: |
