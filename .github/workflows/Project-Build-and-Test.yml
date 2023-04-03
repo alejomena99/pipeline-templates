@@ -19,7 +19,6 @@ jobs:
           ref: main
           path: project
           token: ${{ secrets.REPO_TOKEN }}
-          shallow: true
       
       - name: Tree
         run: tree
