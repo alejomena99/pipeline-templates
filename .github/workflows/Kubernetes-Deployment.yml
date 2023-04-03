@@ -18,12 +18,6 @@ jobs:
         with:
           repository: ${{ secrets.REPO_NAME }}
           token: ${{ secrets.REPO_TOKEN }}
-          
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v2.0.5
-        with:
-          name: Drop
-          path: ${{ github.workspace }}/build
 
       - name: Azure CLI install and credentials
         run: |
@@ -42,5 +36,5 @@ jobs:
         id: install
         
       - name: Helm deployment
-        run: helm upgrade --namespace default --install --values alejo-helm/values.yaml ${{ secrets.APP }} alejo-helm
+        run: helm upgrade --namespace default --install --values helm/values.yaml ${{ secrets.APP }} helm
            
