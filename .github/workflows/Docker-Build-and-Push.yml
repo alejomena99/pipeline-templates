@@ -9,7 +9,8 @@ on:
   
 jobs:
   Docker_Azure:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
+    if: ${{ inputs.DOCKER_REGISTER == 'acr' }}
     steps:
 
       - name: Checkout
