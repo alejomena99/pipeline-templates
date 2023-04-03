@@ -16,9 +16,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ secrets.REPO_NAME }}
-          ref: main
-          path: project
           token: ${{ secrets.REPO_TOKEN }}
+          path: 'project'
       
       - name: Tree
         run: tree
