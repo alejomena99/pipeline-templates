@@ -33,6 +33,7 @@ jobs:
   Docker_prueba:
     uses: alejo-quind/pipeline-templates/.github/workflows/Docker-Build-and-Push.yml@main 
     if: ${{ inputs.DOCKER_REGISTER == 'acr' }}
+    needs: Build_and_Test
     secrets:
       inherit
     with:
