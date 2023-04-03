@@ -12,13 +12,18 @@ jobs:
     runs-on: ubuntu-latest  
     steps:
     
-      - name: Clonar repositorio
+      - name: Clone the "project" folder from the repository
         uses: actions/checkout@v2.4.2
         with:
           repository: ${{ secrets.REPO_NAME }}
           ref: main
           path: project
           token: ${{ secrets.REPO_TOKEN }}
+          
+      - name: Move contents of 'project' folder to root
+        run: |
+          mv project/* .
+          rm -rf project
       
       - name: Tree
         run: tree
