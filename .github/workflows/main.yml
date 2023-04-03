@@ -22,27 +22,27 @@ on:
         
 jobs:
           
-  Build_and_Test:
+  Project_Build_and_Test:
     uses: alejo-quind/pipeline-templates/.github/workflows/Project-Build-and-Test.yml@main 
-    if: ${{ inputs.BUILD_ENV == 'npm' }}
     secrets:
       inherit
     with:
       TEST_WITH: ${{ inputs.TEST_WITH }}
+      BUILD_ENV: ${{ inputs.BUILD_ENV }}
 
-  Docker_prueba:
+  Docker_Build_and_Push:
     uses: alejo-quind/pipeline-templates/.github/workflows/Docker-Build-and-Push.yml@main 
-    if: ${{ inputs.DOCKER_REGISTER == 'acr' }}
-    needs: Build_and_Test
+    needs: Project_Build_and_Test
     secrets:
       inherit
     with:
       DOCKER_REGISTER: ${{ inputs.DOCKER_REGISTER }}
       
+      
   Azure_and_Docker:
     runs-on: ubuntu-latest  
     if: ${{ inputs.VAR == 'si' }}
-    needs: Build_and_Test
+    needs: Docker_Build_and_Push
     steps:
     
       - name: Azure ACR login
