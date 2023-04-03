@@ -20,6 +20,10 @@ jobs:
         with:
           repository: ${{ secrets.REPO_NAME }}
           token: ${{ secrets.REPO_TOKEN }}
+          path: project
+      
+      - name: Tree
+        run: tree
           
       - name: Replace token
         run: |
