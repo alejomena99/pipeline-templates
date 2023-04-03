@@ -19,6 +19,8 @@ jobs:
           ref: main
           path: project
           token: ${{ secrets.REPO_TOKEN }}
+          submodules: 'none'
+          fetch-depth: 1
       
       - name: Tree
         run: tree
