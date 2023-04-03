@@ -26,6 +26,9 @@ jobs:
         with:
           name: Drop
           path: /tmp/build
+          
+      - name: Tree
+        run: tree
       
       - name: Azure ACR login
         uses: azure/docker-login@v1
