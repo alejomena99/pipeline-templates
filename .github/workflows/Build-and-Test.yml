@@ -26,8 +26,11 @@ jobs:
           sed -i "s/#{POD_NAME}#/${{ secrets.POD_NAME }}/g; s/#{SVC_NAME}#/${{ secrets.SVC_NAME }}/g; s/#{APP}#/${{ secrets.APP }}/g; s/#{ACR_SERVER}#/${{ secrets.ACR_SERVER }}/g; s/#{REPOSITORIO}#/${{ secrets.REPOSITORIO }}/g; s/#{TAG_ID}#/${{ github.run_number }}/g" ${{ github.workspace }}/alejo-helm/values.yaml
           cat ${{ github.workspace }}/alejo-helm/values.yaml
           
+      - name: VAR
+        run: echo ${{ inputs.TEST_WITH }}
+        
       - name: Jest test
-        if: ${{ env.TEST_WITH == 'jest' }}
+        if: ${{ inputs.TEST_WITH == 'jest' }}
         run: | 
           npm install
           npm install react-scripts@latest
