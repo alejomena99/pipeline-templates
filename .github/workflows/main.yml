@@ -8,7 +8,7 @@ on:
         required: true
         type: string
 
-      VAR:
+      KUBERNETES_WITH:
         required: true
         type: string
 
@@ -37,6 +37,14 @@ jobs:
       inherit
     with:
       DOCKER_REGISTER: ${{ inputs.DOCKER_REGISTER }}
+
+  Kubernetes_Deployment:
+    uses: alejo-quind/pipeline-templates/.github/workflows/Kubernetes-Deployment.yml@main 
+    needs: Docker_Build_and_Push
+    secrets:
+      inherit
+    with:
+      KUBERNETES_WITH: ${{ inputs.KUBERNETES_WITH }}
       
       
   Azure_and_Docker:
