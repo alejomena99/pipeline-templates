@@ -20,7 +20,7 @@ jobs:
         with:
           repository: ${{ secrets.REPO_NAME }}
           token: ${{ secrets.REPO_TOKEN }}
-          path: project
+          path: 'project'
       
       - name: Tree
         run: tree
