@@ -32,11 +32,11 @@ jobs:
 
   Docker_prueba:
     uses: alejo-quind/pipeline-templates/.github/workflows/Docker-Build-and-Push.yml@main 
-    if: ${{ inputs.BUILD_ENV == 'npm' }}
+    if: ${{ inputs.DOCKER_REGISTER == 'acr' }}
     secrets:
       inherit
     with:
-      TEST_WITH: ${{ inputs.TEST_WITH }}
+      DOCKER_REGISTER: ${{ inputs.DOCKER_REGISTER }}
       
   Azure_and_Docker:
     runs-on: ubuntu-latest  
