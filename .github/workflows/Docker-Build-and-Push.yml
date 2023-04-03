@@ -12,6 +12,21 @@ jobs:
     runs-on: ubuntu-latest  
     steps:
     
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout
+        uses: actions/checkout@v2.7.0
+        with:
+          repository: ${{ secrets.REPO_NAME }}
+          token: ${{ secrets.REPO_TOKEN }}
+          
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v2.0.5
+        with:
+          name: Drop
+          path: /tmp/build
+      
       - name: Azure ACR login
         uses: azure/docker-login@v1
         with:
