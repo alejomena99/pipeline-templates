@@ -12,13 +12,12 @@ jobs:
     runs-on: ubuntu-latest  
     steps:
     
-      - name: Checkout
+      - name: Clonar repositorio
         uses: actions/checkout@v2
-
-      - name: Checkout
-        uses: actions/checkout@v2.7.0
         with:
           repository: ${{ secrets.REPO_NAME }}
+          ref: main
+          path: project
           token: ${{ secrets.REPO_TOKEN }}
       
       - name: Tree
