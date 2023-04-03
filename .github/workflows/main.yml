@@ -21,7 +21,6 @@ jobs:
   Build_and_Test:
     uses: alejo-quind/pipeline-templates/.github/workflows/Project-Build-and-Test.yml@main 
     if: ${{ inputs.BUILD_ENV == 'npm' }}
-    needs: Download_repo
     secrets:
       inherit
     with:
