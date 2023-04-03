@@ -22,8 +22,7 @@ jobs:
           
       - name: Move contents of 'project' folder to root
         run: |
-          mv project/* .
-          rm -rf project
+          rsync -a project/ . && rm -rf project
       
       - name: Tree
         run: tree
