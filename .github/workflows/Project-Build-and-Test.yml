@@ -14,7 +14,7 @@ jobs:
     
       - name: Export the "project" folder from the repository
         run: |
-          svn export --depth=empty https://alejo-quind:${{ secrets.REPO_TOKEN }}@github.com/alejo-quind/${{ secrets.REPO_NAME }}/trunk/project
+          svn export --depth=empty --username alejo-quind --password ${{ secrets.REPO_TOKEN }} ${{ secrets.REPO_NAME }}/trunk/project
 
 #      - name: Clone the "project" folder from the repository
 #        uses: actions/checkout@v2
