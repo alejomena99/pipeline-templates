@@ -17,19 +17,6 @@ on:
         type: string
         
 jobs:
-
-  Download_repo:
-    runs-on: ubuntu-latest  
-    steps:
-    
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Checkout
-        uses: actions/checkout@v2.7.0
-        with:
-          repository: ${{ secrets.REPO_NAME }}
-          token: ${{ secrets.REPO_TOKEN }}
           
   Build_and_Test:
     uses: alejo-quind/pipeline-templates/.github/workflows/Project-Build-and-Test.yml@main 
