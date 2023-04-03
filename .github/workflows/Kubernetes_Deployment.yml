@@ -1,0 +1,46 @@
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+    
+      KUBERNETES_WITH:
+        required: true
+        type: string
+  
+jobs:
+  Kubernetes_Azure:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.KUBERNETES_WITH == 'aks' }}
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2.7.0
+        with:
+          repository: ${{ secrets.REPO_NAME }}
+          token: ${{ secrets.REPO_TOKEN }}
+          
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v2.0.5
+        with:
+          name: Drop
+          path: ${{ github.workspace }}/build
+
+      - name: Azure CLI install and credentials
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
+          az aks get-credentials --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.AKS_NAME }}
+      
+      - name: Cat kube config
+        run: sudo cat /home/runner/.kube/config
+      
+      - name: Setup Helm  
+        uses: azure/setup-helm@v3
+        with:
+           version: 'latest' # default is latest (stable)
+           token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+        id: install
+        
+      - name: Helm deployment
+        run: helm upgrade --namespace default --install --values alejo-helm/values.yaml ${{ secrets.APP }} alejo-helm
+           
