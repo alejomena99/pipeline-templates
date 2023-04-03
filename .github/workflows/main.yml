@@ -18,7 +18,7 @@ on:
         
 jobs:
   Build_and_Test:
-    uses: alejo-quind/pipeline-templates/.github/workflows/npm_B&T.yml@main 
+    uses: alejo-quind/pipeline-templates/.github/workflows/Build-and-Test.yml@main 
     if: ${{ inputs.BUILD_ENV == 'npm' }}
     secrets:
       inherit
