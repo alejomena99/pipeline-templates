@@ -15,6 +15,10 @@ on:
       TEST_WITH:
         required: true
         type: string
+  
+      DOCKER_REGISTER:
+        required: true
+        type: string
         
 jobs:
           
@@ -26,6 +30,14 @@ jobs:
     with:
       TEST_WITH: ${{ inputs.TEST_WITH }}
 
+  Docker_prueba:
+    uses: alejo-quind/pipeline-templates/.github/workflows/Docker-Build-and-Push.yml@main 
+    if: ${{ inputs.BUILD_ENV == 'npm' }}
+    secrets:
+      inherit
+    with:
+      TEST_WITH: ${{ inputs.TEST_WITH }}
+      
   Azure_and_Docker:
     runs-on: ubuntu-latest  
     if: ${{ inputs.VAR == 'si' }}
