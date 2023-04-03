@@ -6,10 +6,15 @@ on:
       TEST_WITH:
         required: true
         type: string
+
+      BUILD_ENV:
+        required: true
+        type: string
   
 jobs:
   NPM:
     runs-on: ubuntu-latest  
+    if: ${{ inputs.BUILD_ENV == 'npm' }}
     steps:
     
       - name: Checkout
