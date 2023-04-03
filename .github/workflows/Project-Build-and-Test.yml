@@ -17,7 +17,7 @@ jobs:
         with:
           repository: ${{ secrets.REPO_NAME }}
           ref: main
-          path: project
+          path: project/
           token: ${{ secrets.REPO_TOKEN }}
       
       - name: Tree
