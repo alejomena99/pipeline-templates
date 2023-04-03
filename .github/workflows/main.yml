@@ -27,7 +27,8 @@ jobs:
 
   Azure_and_Docker:
     runs-on: ubuntu-latest  
-    if: ${{ inputs.VAR == 'no' }}
+    if: ${{ inputs.VAR == 'si' }}
+    needs: Build_and_Test
     steps:
     
       - name: Azure ACR login
