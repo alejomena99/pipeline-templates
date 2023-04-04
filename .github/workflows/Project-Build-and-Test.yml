@@ -68,11 +68,11 @@ jobs:
             test
             build
       
+      - name: Tree
+        run: tree
+        
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
-        
-      - name: Tree
-        run: tree
