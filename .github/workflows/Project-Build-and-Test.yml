@@ -64,7 +64,15 @@ jobs:
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.4.0
         with:
-          arguments: test -DtestResultsDir=build/test-results
+          arguments: |
+            test
+            build
+      
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
         
       - name: Tree
         run: tree
