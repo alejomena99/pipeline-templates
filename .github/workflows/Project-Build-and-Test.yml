@@ -63,3 +63,6 @@ jobs:
       
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.4.0
+        
+      - name: Tree
+        run: tree
