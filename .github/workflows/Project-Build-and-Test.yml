@@ -12,7 +12,7 @@ on:
         type: string
   
 jobs:
-  NPM:
+  Npm:
     runs-on: ubuntu-latest  
     if: ${{ inputs.BUILD_ENV == 'npm' }}
     steps:
@@ -46,3 +46,17 @@ jobs:
         with:
           name: 'Drop'
           path: '${{ github.workspace }}/build'
+
+  Gradle:
+    runs-on: ubuntu-latest  
+    if: ${{ inputs.BUILD_ENV == 'gradle' }}
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2.7.0
+        with:
+          repository: ${{ secrets.REPO_NAME }}
+          token: ${{ secrets.REPO_TOKEN }}
+          
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1.0.6
