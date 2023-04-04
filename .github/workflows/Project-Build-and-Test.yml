@@ -64,7 +64,7 @@ jobs:
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.4.0
         with:
-          arguments: test
+          arguments: test -DtestResultsDir=build/test-results
         
       - name: Tree
         run: tree
